@@ -22,12 +22,12 @@ Most of us have had to parse command-line arguments from time to time. If we don
 
 The arguments passed to the program consist of flags and values. Flags should be one character, preceded by a minus sign. Each flag should have zero, or one value associated with it.
 
-[ ] You should write a parser for this kind of arguments. 
-[ ] This parser takes a schema detailing what arguments the program expects. 
-[ ] The schema specifies the number and types of flags and values the program expects.
-[ ] Once the schema has been specified, the program should pass the actual argument list to the args parser. 
-[ ] It will verify that the arguments match the schema. The program can then ask the args parser for each of the values, using the names of the flags. 
-[ ] The values are returned with the correct types, as specified in the schema.
+- [ ] You should write a parser for this kind of arguments. 
+- [ ] This parser takes a schema detailing what arguments the program expects. 
+- [ ] The schema specifies the number and types of flags and values the program expects.
+- [ ] Once the schema has been specified, the program should pass the actual argument list to the args parser. 
+- [ ] It will verify that the arguments match the schema. The program can then ask the args parser for each of the values, using the names of the flags. 
+- [ ] The values are returned with the correct types, as specified in the schema.
 
 For example if the program is to be called with these arguments:
 
@@ -43,7 +43,7 @@ If you are feeling ambitious, extend your code to support lists eg
 
 So the “g” flag indicates a list of strings, [“this”, “is”, “a”, “list”] and the “d” flag indicates a list of integers, [1, 2, -3, 5].
 
-[ ] Make sure your code is extensible, in that it is straightforward and obvious how to add new types of values.
+- [ ] Make sure your code is extensible, in that it is straightforward and obvious how to add new types of values.
 
 ### Clues
 
@@ -51,9 +51,9 @@ What the schema should look like and how to specify it is deliberately left vagu
 
 ### Suggested Test Cases
 
-[ ] make sure you have a test with a negative integer (confusing - sign)
-[ ] the order of the arguments need not match the order given in the schema.
-[ ]have some tests that suitable default values are correctly assigned if flags given in the schema are missing in the args given.
+- [ ] make sure you have a test with a negative integer (confusing - sign)
+- [ ] the order of the arguments need not match the order given in the schema.
+- [ ]have some tests that suitable default values are correctly assigned if flags given in the schema are missing in the args given.
 
 ## Requerimientos no-funcionales
 - Calidad
