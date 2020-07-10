@@ -14,106 +14,111 @@ Antes de iniciar debes instalar las siguientes herramientas, evaluar tu código 
 
 ## Requerimientos funcionales
 
-Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a
-prominent city ran by a friendly innkeeper named Allison. We also buy and sell only the finest goods.
-Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We
-have a system in place that updates our inventory for us. It was developed by a no-nonsense type named
-Leeroy, who has moved on to new adventures. Your task is to add the new feature to our system so that
-we can begin selling a new category of items. First an introduction to our system:
+This Kata is presented in Robert C.. Martin’s book “Clean Code”, chapter 14. and was taken from [CodingDojo website](https://codingdojo.org/)
 
-	- All items have a SellIn value which denotes the number of days we have to sell the item
-	- All items have a Quality value which denotes how valuable the item is
-	- At the end of each day our system lowers both values for every item
+### Problem Description
 
-Pretty simple, right? Well this is where it gets interesting:
+Most of us have had to parse command-line arguments from time to time. If we don’t have a convenient utility, then we simply walk the array of strings that is passed into the main function. There are several good utilities available from various sources, but they probably don’t do exactly what we want. So let’s write another one!
 
-	- Once the sell by date has passed, Quality degrades twice as fast
-	- The Quality of an item is never negative
-	- "Aged Brie" actually increases in Quality the older it gets
-	- The Quality of an item is never more than 50
-	- "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
-	- "Backstage passes", like aged brie, increases in Quality as its SellIn value approaches;
-	Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but
-	Quality drops to 0 after the concert
+The arguments passed to the program consist of flags and values. Flags should be one character, preceded by a minus sign. Each flag should have zero, or one value associated with it.
 
-We have recently signed a supplier of conjured items. This requires an update to our system:
+[ ] You should write a parser for this kind of arguments. 
+[ ] This parser takes a schema detailing what arguments the program expects. 
+[ ] The schema specifies the number and types of flags and values the program expects.
+[ ] Once the schema has been specified, the program should pass the actual argument list to the args parser. 
+[ ] It will verify that the arguments match the schema. The program can then ask the args parser for each of the values, using the names of the flags. 
+[ ] The values are returned with the correct types, as specified in the schema.
 
-	- "Conjured" items degrade in Quality twice as fast as normal items
+For example if the program is to be called with these arguments:
 
-Feel free to make any changes to the UpdateQuality method and add any new code as long as everything
-still works correctly. However, do not alter the Item class or Items property as those belong to the
-goblin in the corner who will insta-rage and one-shot you as he doesn't believe in shared code
-ownership (you can make the UpdateQuality method and Items property static if you like, we'll cover
-for you).
+-l -p 8080 -d /usr/logs
 
-Just for clarification, an item can never have its Quality increase above 50, however "Sulfuras" is a
-legendary item and as such its Quality is 80 and it never alters.
+this indicates a schema with 3 flags: l, p, d. The “l” (logging) flag has no values associated with it, it is a boolean flag, True if present, False if not. the “p” (port) flag has an integer value, and the “d” (directory) flag has a string value.
 
-**IMPORTANTE** En [este enlace](https://github.com/emilybache/GildedRose-Refactoring-Kata) encontrarás una descripción detallada del algoritmo así como el [CODIGO INICIAL](https://github.com/emilybache/GildedRose-Refactoring-Kata)
+If a flag mentioned in the schema is missing in the arguments, a suitable default value should be returned. For example “False” for a boolean, 0 for a number, and “” for a string. If the arguments given do not match the schema, it is important that a good error message is given, explaining exactly what is wrong.
+
+If you are feeling ambitious, extend your code to support lists eg
+
+-g this,is,a,list -d 1,2,-3,5
+
+So the “g” flag indicates a list of strings, [“this”, “is”, “a”, “list”] and the “d” flag indicates a list of integers, [1, 2, -3, 5].
+
+[ ] Make sure your code is extensible, in that it is straightforward and obvious how to add new types of values.
+
+### Clues
+
+What the schema should look like and how to specify it is deliberately left vague in the Kata description. An important part of the Kata is to design a concise yet readable format for it.
+
+### Suggested Test Cases
+
+[ ] make sure you have a test with a negative integer (confusing - sign)
+[ ] the order of the arguments need not match the order given in the schema.
+[ ]have some tests that suitable default values are correctly assigned if flags given in the schema are missing in the args given.
 
 ## Requerimientos no-funcionales
 - Calidad
-  - Utilizar estilo de código definido por la comunidad (apoyarse en Rubocop)
-  - Pruebas unitarias
-  - Puntuación en Rubycritic: por lo menos 95 en la carpeta de la App y por lo menos 65 en la carpeta de pruebas
-  - Utilizar [SandiMeter](https://github.com/makaroni4/sandi_meter) para analizar el código y utilizar el resultado para hacer mejoras
+  - [ ] Utilizar estilo de código definido por la comunidad (apoyarse en Rubocop)
+  - [ ] Pruebas unitarias
+  - [ ] Puntuación en Rubycritic: por lo menos 95 en la carpeta de la App y por lo menos 65 en la carpeta de pruebas
+  - [ ] Utilizar [SandiMeter](https://github.com/makaroni4/sandi_meter) para analizar el código y utilizar el resultado para hacer mejoras
 - Ejecución
-  - Puede ejecutarse desde la linea de comandos y mostrar la salida en consola
+  - [ ] Puede ejecutarse desde la linea de comandos y mostrar la salida en consola
 - Código fuente
-  - Orientado a Objetos 
-  - Métodos Pequeños
-  - [Aplicar los principios SOLID](https://rubygarage.org/blog/solid-principles-of-ood)
+  - [ ] Orientado a Objetos 
+  - [ ] Métodos Pequeños
+  - [ ] [Aplicar los principios SOLID](https://rubygarage.org/blog/solid-principles-of-ood)
 
 ## Tecnologías
-- Lenguaje de programación Ruby
-- Framework para pruebas [Rspec](https://rspec.info/) ó [Minitest](https://github.com/seattlerb/minitest)
-- Línea de comando
+- [ ] Lenguaje de programación Ruby
+- [ ] Framework para pruebas [Rspec](https://rspec.info/) ó [Minitest](https://github.com/seattlerb/minitest)
+- [ ] Línea de comando
 
 ## Entregable
-- Código fuente en Github (1 por equipo)
-- Incluir en el repositorio el [SmallBadge](https://github.com/jorge27/tutorial-rubycritic-small-badge) con la puntuación obtenida por RubyCritic
-- Incluir en el repositorio el reporte HTML que genera [SandiMeter](https://github.com/makaroni4/sandi_meter)
-- El repositorio debe reflejar el trabajo en equipo (en la conversación del repositorio, commits)
-- Debe actualizar [este archivo](setup/README.md) en donde se describa el proceso para hacer funcionar el proyecto y el nombre de los integrantes del equipo
-- Los commits de Git deben ser significativos
+- [ ] Código fuente en Github (1 por equipo)
+- [ ] Incluir en el repositorio el [SmallBadge](https://github.com/jorge27/tutorial-rubycritic-small-badge) con la puntuación obtenida por RubyCritic
+- [ ] Incluir en el repositorio el reporte HTML que genera [SandiMeter](https://github.com/makaroni4/sandi_meter)
+- [ ] El repositorio debe reflejar el trabajo en equipo (en la conversación del repositorio, commits)
+- [ ] Debe actualizar [este archivo](setup/README.md) en donde se describa el proceso para hacer funcionar el proyecto y el nombre de los integrantes del equipo
+- [ ] Los commits de Git deben ser significativos
   
 ## Evaluación / Revisión
-En sus valoraciones los mentores considaran los siguientes aspectos:
-- Orientación a objetos
-- Estructura de archivos
-- Pruebas
-- Código duplicado
-- Separación de intereses (separation of concerns)
-- Convenciones del lenguaje
-- Claridad de la solución
-- Abstracción
-- Uso de características propias del lenguaje Ruby
-- Uso de Git, commits bien definidos y atómicos
-- Puntuación obtenida en RubyCritic
-- Análisis de código obtenido por [SandiMeter](https://github.com/makaroni4/sandi_meter)
+Se consideran los siguientes objetivos:
+- [ ] Cumplimiento de requerimientos funcionales
+- [ ] Cumplimiento de requerimientos no funcionales 
+- [ ] Publicar por lo menos 1 actuualización (commit) por día en el repositorio remoto
+- [ ] Orientación a objetos
+- [ ] Estructura de archivos
+- [ ] Pruebas
+- [ ] Código duplicado (no debe haber código duplicado)
+- [ ] Separación de intereses (separation of concerns)
+- [ ] Convenciones del lenguaje
+- [ ] Claridad de la solución
+- [ ] Abstracción
+- [ ] Uso de características propias del lenguaje Ruby
+- [ ] Uso de Git, commits bien definidos y atómicos
+- [ ] Puntuación obtenida en RubyCritic
+- [ ] Análisis de código obtenido por [SandiMeter](https://github.com/makaroni4/sandi_meter)
 
 ## Flujo de trabajo sugerido
 1. Este ejercicio se realiza en formato de [Code Kata Grupal](https://github.com/bright-coders/commons/tree/master/topics/code-kata)
-2. Dedica un tiempo para explorar y entender los requerimientos funcionales
-3. **IMPORTANTE** En [este enlace](https://github.com/emilybache/GildedRose-Refactoring-Kata) encontrarás una descripción detallada del algoritmo así como el [CODIGO INICIAL](https://github.com/emilybache/GildedRose-Refactoring-Kata)
-4. Ejecuta las pruebas y asegurate de que el código inicial las pasa
-5. Inicia el proceso de refactorización, es decir, incorporar mejoras al código inicial tomando en cuenta lo especificado en los Requerimientos Funcionales
-6. Agrega los nuevos features solicitados en los requerimientos funcionales
-7. Agrega pruebas para cada feature implementado
-8. Itera, refactoriza y asegurate de que las pruebas sigan pasando
-9. En todo momento asegurate de tu código cumpla con los requerimientos funcionales solicitados.
-10. Una vez terminada tu implementación envíala #support para recibir retroalimentación
-11. Asegurate de que por lo menos 1 de los mentores apruebe tu solución
+2. Dedica tiempo a leer y entender los requerimientos funcionales
+3. Selecciona algún feature o requerimiento y escribe la(s) prueba(s) que debe pasar
+4. Codifica la solución para ese feature (si lo consideras necesario puedes cambiar el orden es decir primero codificar y después escribir la prueba)
+5. En tu primer intento no te preocupes demasiado por lo elegante de tu solución sino por pasen todas las pruebas
+6. Una vez que la solución funciona, haz un ejercicio de refactorización asegurandote que las pruebas sigan pasando
+7. Toma el siguiente feature o requerimiento y repite el proceso
 
 ## Resumen 
-- Tienes un máximo de 5 días para terminar esta kata
-- Durante el proceso de desarrollo debes mantener actualizado este repositorio
-- [Los commits deben ser significativos](https://medium.com/better-programming/you-need-meaningful-commit-messages-d869e44e98d4)
-- Se requiere por lo menos la aprobación de por lo menos 1 mentor
-- Incluir pruebas (TDD)
-- Deberás incluir el linter RuboCop en tu proyecto
-- Debes utilizar Rubycritic y obtener por lo menos una puntuación de 95 en la carpeta de tu app y 65 en la de pruebas
-- NO es un examen sino un ejercicio por lo que puedes apoyarte en tus compañeros y mentores para recibir ayuda, así que si tienes dudas, pregunta, pregunta pregunta!
+- [ ] Tienes un máximo de 5 días para terminar esta kata
+- [ ] Deberás publicar por lo menos 1 actualización (commit) diaria en tu repositorio rempto
+- [ ] Durante el proceso de desarrollo debes mantener actualizado este repositorio
+- [ ] [Los commits deben ser significativos](https://medium.com/better-programming/you-need-meaningful-commit-messages-d869e44e98d4)
+- [ ] Se requiere por lo menos la aprobación de por lo menos 2 Brightcoders
+- [ ] Incluir pruebas (TDD)
+- [ ] Deberás incluir el linter RuboCop en tu proyecto
+- [ ] Debes utilizar Rubycritic y obtener por lo menos una puntuación de 95 en la carpeta de tu app y 65 en la de pruebas
+
+**NO** es un examen sino un ejercicio por lo que puedes apoyarte en tus compañeros y mentores para recibir ayuda, así que si tienes dudas, pregunta, pregunta pregunta!
 
 ## Setup
 En [este elnace](setup/README.md) se describen los pasos necesarios para ejecutar/probar este proyecto, así como los integrantes de este equipo
@@ -123,8 +128,6 @@ En [este elnace](setup/README.md) se describen los pasos necesarios para ejecuta
 - [You Need to Write Meaningful Commit Messages](https://medium.com/better-programming/you-need-meaningful-commit-messages-d869e44e98d4) 
 - [Writing meaningful git commit messages](https://medium.com/@menuka/writing-meaningful-git-commit-messages-a62756b65c81)
 - [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/)
-### The Gilded Rose Refactoring Kata
-- [The Gilded Rose Refactoring Kata](https://github.com/emilybache/GildedRose-Refactoring-Kata)
 ### Tools
 - [Rubocop](https://rubocop.org/)
 - [Rubycritic](https://github.com/whitesmith/rubycritic) 
