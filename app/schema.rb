@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 # Schema class
-class Schema
-  def initialize
-    
+Schema = Struct.new(:name, :value) do
+  def to_s
+    "Argument: #{name} Value: #{value}"
   end
 end
