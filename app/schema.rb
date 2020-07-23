@@ -3,6 +3,6 @@
 # Schema class
 Schema = Struct.new(:name, :value) do
   def to_s
-    "Argument: #{name} Value: #{value}"
+    "#{name} : #{value}"
   end
 end

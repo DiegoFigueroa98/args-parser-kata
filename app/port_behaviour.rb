@@ -3,21 +3,21 @@ require_relative 'flag_behaviour'
 
 # Parent class of any flag
 class PortBehaviour < FlagBehaviour
-  def initialize(flag_exists)
+  def initialize(flag_exists, argv)
     @name = 'Port'
     @value = flag_exists
+    @arguments = argv
   end
-
-  def create_flag_schema(argv)
-    Schema.new(@name, @value)
-  end
-
-  def indetify_value(argv)
-    position = argv.index('-p')
-    if /\A[-+]?\d+\z/.match(argv[position + 1])
-      @value = argv[position + 1]
+  
+  def identify_value
+    position = @arguments.index('-p')
+    if /\A[-+]?\d+\z/.match(@arguments[position + 1]) != nil
+      @value = @arguments[position + 1]
+    elsif @arguments[position + 1] == "-d" || @arguments[position + 1] == "-l" || @arguments[position + 1] == nil
+      @value = 0
     else
       @value = "Error, given value is not a integer"
     end
+      
   end
 end
