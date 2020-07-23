@@ -3,14 +3,18 @@ require_relative 'flag_behaviour'
 
 # Parent class of any flag
 class DirectoryBehaviour < FlagBehaviour
-  def initialize(flag_exists)
+  def initialize(flag_exists, argv)
     @name = 'Directory'
     @value = flag_exists
+    @arguments = argv
   end
-
-  def create_flag_schema(argv)
-  end
-
-  def indetify_value(argv)
+  
+  def identify_value
+    position = @arguments.index('-d')
+    if /^(\/[\w^ ]+)+\/?$/.match(@arguments[position + 1]) != nil
+      @value = @arguments[position + 1]
+    else
+      @value = "Error, given value is not a valid path"
+    end
   end
 end

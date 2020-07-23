@@ -8,7 +8,3 @@ class MainArgs
     position = @arguments.index("-l")
   end
 end
-
-MainArgs.new(ARGV)
-schema = Schema.new("l", "boolean", "false")
-schema.to_s
