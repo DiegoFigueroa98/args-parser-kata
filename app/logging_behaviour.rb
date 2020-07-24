@@ -5,8 +5,8 @@ require_relative 'schema'
 
 # Parent class of any flag
 class LoggingBehaviour < FlagBehaviour
-  def initialize(flag_exists, _argv)
+  def initialize(argv)
     @name = 'Logging'
-    @value = flag_exists
+    @value = argv.include?('-l')
   end
 end

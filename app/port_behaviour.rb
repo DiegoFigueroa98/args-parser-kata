@@ -4,15 +4,15 @@ require_relative 'flag_behaviour'
 
 # Parent class of any flag
 class PortBehaviour < FlagBehaviour
-  def initialize(flag_exists, argv)
+  def initialize(argv)
     super
     @name = 'Port'
     @error_msg = 'Error, given value is not a integer'
-    @value ? identify_supposed_value('-p') : @supposed_value = ''
+    argv.include?('-p') ? identify_supposed_value('-p') : @value = 0
   end
 
   def identify_value
-    return @value = 0 if flag?(@supposed_value) || @supposed_value.nil? || !@value
+    return @value = 0 if flag?(@supposed_value) || @supposed_value.nil?
 
     @value = valid_flag_value? ? @supposed_value : @error_msg
   end

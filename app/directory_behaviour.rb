@@ -4,15 +4,15 @@ require_relative 'flag_behaviour'
 
 # Parent class of any flag
 class DirectoryBehaviour < FlagBehaviour
-  def initialize(flag_exists, argv)
+  def initialize(argv)
     super
     @name = 'Directory'
     @error_msg = 'Error, given value is not a valid path'
-    @value ? identify_supposed_value('-d') : @supposed_value = ''
+    argv.include?('-d') ? identify_supposed_value('-d') : @value = ''
   end
 
   def identify_value
-    return @value = '' if flag?(@supposed_value) || @supposed_value.nil? || !@value
+    return @value = '' if flag?(@supposed_value) || @supposed_value.nil?
 
     @value = valid_flag_value? ? @supposed_value : @error_msg
   end
