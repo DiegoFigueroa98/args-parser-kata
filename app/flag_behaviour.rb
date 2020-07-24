@@ -5,9 +5,14 @@ require_relative 'schema'
 # Parent class of any flag
 class FlagBehaviour
   def initialize(flag_exists, argv)
-    @value = flag_exists
     @arguments = argv
     @flags = ['-l', '-p', '-d']
+    @value = flag_exists
+  end
+
+  def identify_supposed_value(flag_name)
+    position = @arguments.index(flag_name)
+    @supposed_value = @arguments[position + 1]
   end
 
   def identify_value; end

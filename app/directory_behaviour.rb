@@ -7,16 +7,21 @@ class DirectoryBehaviour < FlagBehaviour
   def initialize(flag_exists, argv)
     super
     @name = 'Directory'
+    @error_msg = 'Error, given value is not a valid path'
+    identify_supposed_value('-d')
   end
 
   def identify_value
-    position = @arguments.index('-d')
-    if /^(\/[\w^ ]+)+\/?$/.match(@arguments[position + 1]) != nil && flag?(@arguments[position + 1]) == false
-      @value = @arguments[position + 1]
-    elsif @flags.include?(@arguments[position + 1]) || @arguments[position + 1] == nil
-      @value = ''
-    else
-      @value = 'Error, given value is not a valid path'
-    end
+    @supposed_value.nil? ? @value = '' : flag_value_is_not_nill
+  end
+
+  def flag_value_is_not_nill
+    valid_flag_value? ? @value = @supposed_value : @value = @error_msg
+    @value = '' if flag?(@supposed_value)
+  end
+
+  def valid_flag_value?
+    regex = /^(\/[\w^ ]+)+\/?$/
+    regex.match(@supposed_value) != nil && flag?(@supposed_value) == false
   end
 end

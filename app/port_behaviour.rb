@@ -1,23 +1,27 @@
 # frozen_string_literal: true
+
 require_relative 'flag_behaviour'
 
 # Parent class of any flag
 class PortBehaviour < FlagBehaviour
   def initialize(flag_exists, argv)
+    super
     @name = 'Port'
-    @value = flag_exists
-    @arguments = argv
+    @error_msg = 'Error, given value is not a integer'
+    identify_supposed_value('-p')
   end
-  
+
   def identify_value
-    position = @arguments.index('-p')
-    if /\A[-+]?\d+\z/.match(@arguments[position + 1]) != nil
-      @value = @arguments[position + 1]
-    elsif @arguments[position + 1] == "-d" || @arguments[position + 1] == "-l" || @arguments[position + 1] == nil
-      @value = 0
-    else
-      @value = "Error, given value is not a integer"
-    end
-      
+    @supposed_value.nil? ? @value = 0 : flag_value_is_not_nill
+  end
+
+  def flag_value_is_not_nill
+    valid_flag_value? ? @value = @supposed_value : @value = @error_msg
+    @value = 0 if flag?(@supposed_value)
+  end
+
+  def valid_flag_value?
+    regex = /\A[-+]?\d+\z/
+    regex.match(@supposed_value) != nil && flag?(@supposed_value) == false
   end
 end
