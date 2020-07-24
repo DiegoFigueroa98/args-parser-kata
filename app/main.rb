@@ -10,17 +10,22 @@ class MainArgs < FlagBehaviour
   def initialize(argv)
     super
     @flags_schemas = []
+    save_flags_schema
   end
 
-  def obtain_present_flags
+  def save_flags_schema
     @flags.each do |flag|
       @flags_schemas.push(obtain_flag_schema(flag))
     end
   end
 
   def show_flags_result
-    obtain_present_flags
     @flags_schemas.each { |flag| puts flag.create_flag_schema.to_s }
+  end
+
+  def test_flags_result(result = "")
+    @flags_schemas.each { |flag| result += flag.create_flag_schema.to_s + " "}
+    result
   end
 
   def flag_appears?(flag_name)
