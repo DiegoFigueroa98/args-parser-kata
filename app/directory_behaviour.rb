@@ -8,20 +8,17 @@ class DirectoryBehaviour < FlagBehaviour
     super
     @name = 'Directory'
     @error_msg = 'Error, given value is not a valid path'
-    identify_supposed_value('-d')
+    @value ? identify_supposed_value('-d') : @supposed_value = ''
   end
 
   def identify_value
-    @supposed_value.nil? ? @value = '' : flag_value_is_not_nill
-  end
+    return @value = '' if flag?(@supposed_value) || @supposed_value.nil? || !@value
 
-  def flag_value_is_not_nill
-    valid_flag_value? ? @value = @supposed_value : @value = @error_msg
-    @value = '' if flag?(@supposed_value)
+    @value = valid_flag_value? ? @supposed_value : @error_msg
   end
 
   def valid_flag_value?
-    regex = /^(\/[\w^ ]+)+\/?$/
-    regex.match(@supposed_value) != nil && flag?(@supposed_value) == false
+    regex = %r{^(\/[\w^ ]+)+\/?$}
+    !regex.match(@supposed_value).nil? && flag?(@supposed_value) == false
   end
 end
