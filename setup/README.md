@@ -18,26 +18,26 @@ ruby app/main.rb -l -p 8080 -d /usr/logs
 ```
 ruby app/main.rb -g this,is,a,list -d 1,2,3,4,-5
 ```
-## Pasos para ejecutar el archivo de pruebas
-1. Ejecutar pruebas con el comando
+## Step to execute the spec tests
+1. Execute tests inside spec folder with the next command
 ```
-rspec specs
+rspec spec/[each_file_name]
 ```
 
-## Verificar puntuacion de rubycritic en el proyecto
-1. Ejecutar comando
+## Check rubycritic score in the project
+1. Run command
 ```
 rubycritic lib
 ```
 
-# Verificar la puntuacion de rubycritic en las pruebas
-1. Ejecutar comando 
+# Check rubycritic score on tests
+1. Run command
 ```
-rubycritic specs
+rubycritic spec
 ```
 
-# Verificar puntuación Sandi-meter
-1. Ejecutar comando
+# Check Sandi-meter score
+1. Run command
 ```
 sandi_meter 
  ```
