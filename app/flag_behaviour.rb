@@ -6,7 +6,7 @@ require_relative 'schema'
 class FlagBehaviour
   def initialize(argv)
     @arguments = argv
-    @flags = ['-l', '-p', '-d']
+    @flags = ['-l', '-p', '-d', '-g']
   end
 
   def identify_supposed_value(flag_name)
@@ -26,9 +26,10 @@ class FlagBehaviour
   end
 
   def list_type?
-    int_regex = %r{/^(0|-*[1-9]+[0-9]*)+(?:, ?(0|-*[1-9]+[0-9]*)+)*$/}
-    string_regex = %r{/^[^,]+(?:, ?[^,]+)*$/}
+    int_regex = %r{^(0|-*[1-9]+[0-9]*)+(?:, ?(0|-*[1-9]+[0-9]*)+)*$}
+    string_regex = %r{^[^,]+(?:, ?[^,]+)*$}
     return 'i' if !int_regex.match(@supposed_value).nil? && !flag?(@supposed_value)
     return 's' if !string_regex.match(@supposed_value).nil? && !flag?(@supposed_value)
+    return false
   end
 end

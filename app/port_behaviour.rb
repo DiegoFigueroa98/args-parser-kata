@@ -19,6 +19,6 @@ class PortBehaviour < FlagBehaviour
 
   def valid_flag_value?
     regex = %r{\A[-+]?\d+\z}
-    !regex.match(@supposed_value).nil? && flag?(@supposed_value) == false
+    !regex.match(@supposed_value).nil? && !flag?(@supposed_value)
   end
 end

@@ -8,9 +8,14 @@ RSpec.describe 'Directory Flag Behaviour' do
     expect(directory.create_flag_schema.to_s).to eq("Directory : /etc/diego")
   end
 
-  it "Checks the result of a directory flag schema when there is an error" do
+  it "Checks the result of a directory flag schema when there is not a valid path" do
     directory = DirectoryBehaviour.new(["-d", "etc/diego.txt;"])
-    expect(directory.create_flag_schema.to_s).to eq("Directory : Error, given value is not a valid path")
+    expect(directory.create_flag_schema.to_s).to eq('String List : ["etc/diego.txt;"]')
+  end
+
+  it "Checks the result of a directory flag schema when there is not a valid path neither a valid string list" do
+    directory = DirectoryBehaviour.new(["-d", "etc/diego.txt;,,"])
+    expect(directory.create_flag_schema.to_s).to eq("String List : Error, given value is not a valid String List")
   end
 
   it "Checks the result of a directory flag schema when has no values associated" do

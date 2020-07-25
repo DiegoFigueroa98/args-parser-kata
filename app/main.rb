@@ -4,6 +4,7 @@ require_relative 'flag_behaviour'
 require_relative 'logging_behaviour'
 require_relative 'port_behaviour'
 require_relative 'directory_behaviour'
+require_relative 'integer_list_behaviour'
 
 # Schema class
 class MainArgs < FlagBehaviour
@@ -23,8 +24,8 @@ class MainArgs < FlagBehaviour
     @flags_schemas.each { |flag| puts flag.create_flag_schema.to_s }
   end
 
-  def test_flags_result(result = "")
-    @flags_schemas.each { |flag| result += flag.create_flag_schema.to_s + " "}
+  def test_flags_result(result = '')
+    @flags_schemas.each { |flag| result += flag.create_flag_schema.to_s + ' ' }
     result
   end
 
@@ -36,6 +37,7 @@ class MainArgs < FlagBehaviour
     return LoggingBehaviour.new(@arguments) if flag_name == '-l'
     return PortBehaviour.new(@arguments) if flag_name == '-p'
     return DirectoryBehaviour.new(@arguments) if flag_name == '-d'
+    return IntegerListBehaviour.new(@arguments) if flag_name == '-g'
   end
 end
 
