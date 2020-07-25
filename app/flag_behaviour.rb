@@ -30,6 +30,5 @@ class FlagBehaviour
     string_regex = %r{^[^,]+(?:, ?[^,]+)*$}
     return 'i' if !int_regex.match(@supposed_value).nil? && !flag?(@supposed_value)
     return 's' if !string_regex.match(@supposed_value).nil? && !flag?(@supposed_value)
-    return false
   end
 end

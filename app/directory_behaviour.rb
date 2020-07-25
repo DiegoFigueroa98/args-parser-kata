@@ -7,15 +7,16 @@ class DirectoryBehaviour < FlagBehaviour
   def initialize(argv)
     super
     @name = 'Directory'
-    @error_msg = 'Error, given value is not a valid String List'
+    @error_msg = 'Error, given value is not a valid path'
     argv.include?('-d') ? identify_supposed_value('-d') : @value = ''
   end
 
   def identify_value
     return @value = '' if flag?(@supposed_value) || @supposed_value.nil?
     return @value = @supposed_value if valid_flag_value?
+    return valid_list if list_type? == 'i'
 
-    !valid_flag_value? && !list_type? ? not_valid_list : valid_list
+    !%r{\d}.match(@supposed_value).nil? && !@supposed_value.include?('/') ? not_valid_list : @value = @error_msg
   end
 
   def valid_flag_value?
@@ -24,12 +25,12 @@ class DirectoryBehaviour < FlagBehaviour
   end
 
   def valid_list
-    @name = 'String List'
+    @name = 'Integer List'
     @value = @supposed_value.split(',')
   end
 
   def not_valid_list
-    @name = 'String List'
-    @value = @error_msg
+    @name = 'Integer List'
+    @value = 'Error, given value is not a valid Integer List'
   end
 end
